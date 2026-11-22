@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="12" styleClass="root-pane"
+      xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.savana.cpuschedulersimulator.SchedulerController">
+    <padding>
+        <Insets top="18" right="18" bottom="18" left="18"/>
+    </padding>
+
+    <Label text="CPU Scheduling Simulator" styleClass="title-label"/>
+
+    <!-- 1. Add Processes -->
+    <VBox spacing="6" styleClass="card">
+        <Label text="1. Add Processes" styleClass="section-header"/>
+        <HBox spacing="8" alignment="CENTER_LEFT">
+            <TextField fx:id="idField" promptText="ID (e.g. 1)" prefWidth="85"/>
+            <TextField fx:id="arrivalField" promptText="Arrival" prefWidth="85"/>
+            <TextField fx:id="burstField" promptText="Burst" prefWidth="85"/>
+            <TextField fx:id="priorityField" promptText="Priority" prefWidth="85"/>
+            <Button text="Add Process" onAction="#handleAddProcess" styleClass="btn-primary"/>
+            <Button text="Clear" onAction="#handleClear" styleClass="btn-secondary"/>
+        </HBox>
+    </VBox>
+
+    <!-- 2. Configure & Run -->
+    <VBox spacing="6" styleClass="card">
+        <Label text="2. Configure &amp; Run" styleClass="section-header"/>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Scheduler:"/>
+            <ComboBox fx:id="algoBox" prefWidth="230"/>
+            <Label text="Context Switch:"/>
+            <TextField fx:id="csField" text="1" prefWidth="55"/>
+            <Label text="Quantum (ACS):"/>
+            <TextField fx:id="quantumField" text="3" prefWidth="55"/>
+            <Button text="Run Simulation" onAction="#handleRun" styleClass="btn-run"/>
+        </HBox>
+    </VBox>
+
+    <!-- 3. Results Table -->
+    <VBox spacing="6" styleClass="card">
+        <Label text="3. Results Table" styleClass="section-header"/>
+        <TableView fx:id="processTable" prefHeight="210">
+            <columns>
+                <TableColumn fx:id="idCol" text="ID"/>
+                <TableColumn fx:id="arrivalCol" text="Arrival"/>
+                <TableColumn fx:id="burstCol" text="Burst"/>
+                <TableColumn fx:id="priorityCol" text="Priority"/>
+                <TableColumn fx:id="finishCol" text="Finish"/>
+                <TableColumn fx:id="turnaroundCol" text="Turnaround"/>
+                <TableColumn fx:id="waitingCol" text="Waiting"/>
+                <TableColumn fx:id="responseCol" text="Response"/>
+            </columns>
+        </TableView>
+        <Label fx:id="avgLabel" text="Averages: -" styleClass="avg-label"/>
+    </VBox>
+
+    <!-- 4. Step-by-Step Execution Log -->
+    <VBox spacing="6" styleClass="card" VBox.vgrow="ALWAYS">
+        <Label text="4. Step-by-Step Execution Log" styleClass="section-header"/>
+        <TextArea fx:id="logArea" editable="false" prefHeight="200" styleClass="log-area" VBox.vgrow="ALWAYS"/>
+    </VBox>
+
+</VBox>

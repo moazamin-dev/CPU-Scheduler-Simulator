@@ -1,3 +1,5 @@
+package org.savana.cpuschedulersimulator;
+
 import java.util.Queue;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -49,7 +51,7 @@ public class ACSScheduler {
                             increasePriority();
                         }
                         System.out.println(
-                                "Time " + second + ": Context switch saves" + old.id + " and loads" + current.id);
+                                "Time " + second + ": Context switch saves " + old.id + " and loads " + current.id);
                     }
                     old = current;
                 }

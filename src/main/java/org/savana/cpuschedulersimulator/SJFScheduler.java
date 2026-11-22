@@ -1,3 +1,5 @@
+package org.savana.cpuschedulersimulator;
+
 import java.util.ArrayList;
 import java.util.List;
 

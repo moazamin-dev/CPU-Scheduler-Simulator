@@ -1,3 +1,5 @@
+package org.savana.cpuschedulersimulator;
+
 public class Process {
     public int id;
     public int arrivalTime;
