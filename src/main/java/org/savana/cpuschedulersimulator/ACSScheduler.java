@@ -22,7 +22,8 @@ public class ACSScheduler {
 
     public void increasePriority() {
         for (Process each : tier2) {
-            each.priority++;
+            each.tier2WaitTime++;
+            each.priority = Math.max(1, each.initialPriority - (each.tier2WaitTime / 4));
         }
     }
 
@@ -45,13 +46,14 @@ public class ACSScheduler {
                 current = tier1.poll();
                 if (old != current) {
                     if (old != null) {
+                        System.out.println(
+                                "Time " + second + ": Context switch saves " + old.id + " and loads " + current.id);
                         for (int i = 0; i < contextSwitch; i++) {
                             second++;
                             refresh(second);
                             increasePriority();
                         }
-                        System.out.println(
-                                "Time " + second + ": Context switch saves " + old.id + " and loads " + current.id);
+
                     }
                     old = current;
                 }
@@ -76,20 +78,21 @@ public class ACSScheduler {
             } else if (!tier2.isEmpty()) {
                 current = tier2.get(0);
                 for (Process each : tier2) {
-                    if (each.priority > current.priority) {
+                    if (each.priority < current.priority) {
                         current = each;
                     }
                 }
                 tier2.remove(current);
                 if (old != current) {
                     if (old != null) {
+                        System.out.println(
+                                "Time " + second + ": Context switch saves " + old.id + " and loads " + current.id);
                         for (int i = 0; i < contextSwitch; i++) {
                             second++;
                             refresh(second);
                             increasePriority();
                         }
-                        System.out.println(
-                                "Time " + second + ": Context switch saves " + old.id + " and loads " + current.id);
+
                     }
                     old = current;
                 }
